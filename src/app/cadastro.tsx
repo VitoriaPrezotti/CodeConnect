@@ -14,19 +14,18 @@ export default function login() {
                 source={require("@/assets/Logobranca.png")} style={styles.imagem} resizeMode="contain"
                 />
                 
-                <Text style={styles.subtitulo}>Conecte -se</Text>
 
                 <Text style={styles.entrar}>Criar Conta</Text>
 
                 
                 {/* Formulário */}
                 <View style={styles.form}>
-                <Input placeholder="seu.email@exemplo.com" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" />
-                <Input placeholder="••••••••" placeholderTextColor="#999" secureTextEntry />
-                <Input placeholder="••••••••" placeholderTextColor="#999" secureTextEntry />
-                <Input placeholder="••••••••" placeholderTextColor="#999" secureTextEntry />
-                <Input placeholder="••••••••" placeholderTextColor="#999" secureTextEntry />
-                <Button label='Entrar' />
+                <Input placeholder="Nome do Usuário" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" />
+                <Input placeholder="E-mail" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" />
+                <Input placeholder="Data de Nascimento" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" />
+                <Input placeholder="CPF" placeholderTextColor="#999"  />
+                <Input placeholder="Senha" placeholderTextColor="#999" secureTextEntry />
+                <Button label='Criar conta' />
                 </View>
 
                 <View>
@@ -48,15 +47,8 @@ const styles = StyleSheet.create({
   imagem: {
     width: "100%",
     height: 150, // Altura fixa ao invés de 50%
-    marginTop: 150,
-    marginBottom: 0,
-  },
-  
-  subtitulo: {
-    fontSize: 24,
+    marginTop: 40,
     marginBottom: 50,
-    color: '#ffffff',
-    textAlign:'center',
   },
 
   entrar: {

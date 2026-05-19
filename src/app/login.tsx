@@ -2,19 +2,28 @@ import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platfo
 import { Link } from 'expo-router'
 import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
+import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
 
 export default function login() {
+    const [fontsLoaded] = useFonts({
+    Montserrat_600SemiBold,
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps = "handled">
             <View style={styles.container}>
-                
+      
                 {/* Imagem */}
                 <Image 
                 source={require("@/assets/Logobranca.png")} style={styles.imagem} resizeMode="contain"
                 />
                 
-                <Text style={styles.subtitulo}>Conecte -se</Text>
+                <Text style={styles.subtitulo}>Conecte - se</Text>
                 
                 {/* Formulário */}
                 <View style={styles.form}>
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
   imagem: {
     width: "100%",
     height: 150, // Altura fixa ao invés de 50%
-    marginTop: 150,
+    marginTop: 60,
     marginBottom: 0,
   },
   
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     color: '#ffffff',
     textAlign:'center',
+    fontFamily: 'Montserrat_600SemiBold',
   },
   
   form: {

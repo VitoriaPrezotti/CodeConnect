@@ -1,9 +1,18 @@
 import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import { Link, router } from 'expo-router'
 import { Button } from '@/components/Button'
+import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
 
 
 export default function Index() {
+  const [fontsLoaded] = useFonts({
+    Montserrat_600SemiBold,
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   const handleEntrar = () => {
     router.push('/login')
   }
@@ -16,7 +25,6 @@ export default function Index() {
     router.push('/cadastro')
   }
 
-
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps = "handled">
@@ -24,7 +32,7 @@ export default function Index() {
               
               {/* Imagem */}
               <Image 
-              source={require("@/assets/logpbranca.png")} style={styles.imagem} resizeMode="contain"
+              source={require("@/assets/Logobranca.png")} style={styles.imagem} resizeMode="contain"
               />  
 
               {/* Títulos */}
@@ -35,7 +43,7 @@ export default function Index() {
               <View>
               <Button label='Entrar' onPress={handleEntrar} />
               <Button label='SSO' />
-              <Button label='Criar Conta' onPress={handleCadastro} style={styles. botaoCadastro}  />
+              <Button label='Criar Conta' onPress={handleCadastro} style={styles. botaoCadastro} textStyle={{color:'#ffff'}} />
               </View>
 
               <View>
@@ -69,6 +77,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign:'center',
     marginHorizontal: 17,
+    fontFamily: 'Montserrat_600SemiBold',
   },
   botaoCadastro: {
     width: '88%',
