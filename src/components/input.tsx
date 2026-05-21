@@ -6,15 +6,11 @@ export function Input({...rest }: TextInputProps) {
 
 const style = StyleSheet.create({
     loginInput: {
-        width: '88%',
-        height: 53,
-        backgroundColor: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: 55,
+        backgroundColor: '#ffffffef',
+        paddingHorizontal: 12,
         borderRadius: 10,
-        marginHorizontal: 23,
-        marginTop:26,
-        fontSize:17,
+        fontSize:19,
         fontWeight: '400',
     },
 })

@@ -14,7 +14,6 @@ export default function Layout() {
         name="login"
         options={{
           headerTitle: '',
-          headerBackTitle: '',
           headerBackButtonDisplayMode: 'minimal',
           headerStyle: {
             backgroundColor: '#010409',
@@ -27,7 +26,6 @@ export default function Layout() {
         name="cadastro"
         options={{
           headerTitle: '',
-          headerBackTitle: '',
           headerBackButtonDisplayMode: 'minimal',
           headerStyle: {
             backgroundColor: '#010409',

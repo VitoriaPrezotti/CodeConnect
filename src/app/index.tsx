@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#010409',
-    paddingBottom: '100%', // Espaço no final
+    paddingHorizontal: 22,
+    paddingBottom: 40,
   },
   
   imagem: {
