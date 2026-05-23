@@ -1,18 +1,22 @@
 import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity} from 'react-native'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
 
 export default function login() {
-    const [fontsLoaded] = useFonts({
-    Montserrat_600SemiBold,
+  const [fontsLoaded] = useFonts({
+  Montserrat_600SemiBold,
   })
 
   if (!fontsLoaded) {
     return null
   }
+
+  const handleEntrar = () => {
+      router.push('/telaprincipal_usuario')
+    }
 
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
@@ -45,7 +49,7 @@ export default function login() {
                 placeholderTextColor="#999" 
                 secureTextEntry />
 
-                <Button label='Entrar' style={styles.botaoEntrar}/>
+                <Button label='Entrar' style={styles.botaoEntrar} onPress={handleEntrar} />
                 </View>
 
                 <View style={styles.divisor}/>

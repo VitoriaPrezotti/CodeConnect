@@ -7,6 +7,10 @@ export default function Layout() {
         name="index"
         options={{
           headerShown: false,
+          headerShadowVisible: false,
+          contentStyle: {
+            backgroundColor: '#010409',
+          },
         }}
       />
 
@@ -19,6 +23,10 @@ export default function Layout() {
             backgroundColor: '#010409',
           },
           headerTintColor: '#ffffff',
+          headerShadowVisible: false,
+          contentStyle: {
+            backgroundColor: '#010409',
+          },
         }}
       />
 
@@ -31,6 +39,10 @@ export default function Layout() {
             backgroundColor: '#010409',
           },
           headerTintColor: '#ffffff',
+          headerShadowVisible: false,
+          contentStyle: {
+            backgroundColor: '#010409',
+          },
         }}
       />
     </Stack>
