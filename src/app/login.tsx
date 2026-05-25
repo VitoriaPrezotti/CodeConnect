@@ -1,5 +1,7 @@
-import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity} from 'react-native'
+import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { Link, router } from 'expo-router'
+import { useRef } from 'react'
+import { useForm } from 'react-hook-form'
 import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
@@ -7,8 +9,14 @@ import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
 
 export default function login() {
   const [fontsLoaded] = useFonts({
-  Montserrat_600SemiBold,
+    Montserrat_600SemiBold,
   })
+
+  const { control, handleSubmit, formState: { errors } } = useForm();
+  function handleNextStep(data: any) {
+    console.log(data);
+  }
+  const senhaRef = useRef<TextInput>(null);
 
   if (!fontsLoaded) {
     return null
@@ -33,23 +41,56 @@ export default function login() {
                 <View style={styles.form}>
                 <Text style={styles.titulo}>E-mail</Text>
 
-                <Input 
-                placeholder="seu.email@exemplo.com"
-                placeholderTextColor="#999" 
-                keyboardType="email-address" 
-                autoCapitalize="none" />
-                
+                <Input
+                error={errors.email?.message as string}
+                formProps={{
+                  name: 'email',
+                  control: control,
+                  rules:{
+                    required: 'E-mail é obrigatório',
+                    pattern: {
+                      value:  /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+                      message: 'E-mail inválido.'
+                    }
+                  }
+                }}
+                inputProps={{
+                  placeholder: "seu.email@exemplo.com",
+                  placeholderTextColor: "#999",
+                  keyboardType: "email-address",
+                  autoCapitalize: "none",
+                  onSubmitEditing: () => senhaRef.current?.focus(),
+                }}
+                />
+
                 <View style={styles.senhaLinha}>
                   <Text style={styles.titulo}>Senha</Text>
                   <Link href="/#" style={styles.esqueceu}>Esqueceu sua senha?</Link>
                 </View>
 
                 <Input 
-                placeholder=".........." 
-                placeholderTextColor="#999" 
-                secureTextEntry />
+                ref={senhaRef}
+                error={errors.password?.message as string}
+                formProps={{
+                  name: 'password',
+                  control: control,
+                  rules:{
+                    required: 'Senha é obrigatória',
+                    minLength: {
+                      value: 6,
+                      message: 'Senha deve ter pelo menos 6 caracteres'
+                    }
+                  }
+                }}
+                inputProps={{
+                  placeholder: "Senha",
+                  placeholderTextColor: "#999",
+                  onSubmitEditing: handleSubmit(handleNextStep), 
+                  secureTextEntry: true
+                }}
+                />
 
-                <Button label='Entrar' style={styles.botaoEntrar} onPress={handleEntrar} />
+                <Button label='Entrar' style={styles.botaoEntrar} onPress={handleSubmit(handleNextStep)}/>
                 </View>
 
                 <View style={styles.divisor}/>

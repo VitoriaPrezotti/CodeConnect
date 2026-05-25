@@ -45,6 +45,17 @@ export default function Layout() {
           },
         }}
       />
+
+      <Stack.Screen
+        name="telaprincipal_usuario"
+        options={{
+          headerShown: false,
+          headerShadowVisible: false,
+          contentStyle: {
+            backgroundColor: '#010409',
+          },
+        }}
+      />
     </Stack>
   )
 }

@@ -1,5 +1,6 @@
 import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
+import { useForm, Controller } from 'react-hook-form'
 import { useState } from 'react'
 import { Link, router } from 'expo-router'
 import { Input } from '@/components/input'
@@ -12,6 +13,8 @@ export default function cadastro() {
   const handleCriarConta = () => {
       router.push('/telaprincipal_usuario')
     }
+
+  const { control } = useForm();
 
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
@@ -29,11 +32,57 @@ export default function cadastro() {
                 
                 {/* Formulário */}
                 <View style={styles.form}>
-                <Input placeholder="Nome do Usuário" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" />
-                <Input placeholder="E-mail" placeholderTextColor="#999"  />
-                <Input placeholder="Data de Nascimento" placeholderTextColor="#999" />
-                <Input placeholder="CPF" placeholderTextColor="#999" keyboardType='numeric' />
-                <Input placeholder="Senha" placeholderTextColor="#999" secureTextEntry />
+                <Input
+                 formProps={{
+                   name: 'username',
+                   control: control,
+                 }}
+                 inputProps={{
+                   placeholder: "Nome do Usuário",
+                   placeholderTextColor: "#999",
+                   keyboardType: "email-address",
+                   autoCapitalize: "none"
+                 }}
+                />
+                
+                <Input
+                 formProps={{
+                   name: 'email',
+                 }}
+                 inputProps={{
+                   placeholder: "E-mail",
+                   placeholderTextColor: "#999"
+                 }}
+                />
+                <Input
+                 formProps={{
+                   name: 'birthdate',
+                 }}
+                 inputProps={{
+                   placeholder: "Data de Nascimento",
+                   placeholderTextColor: "#999"
+                 }}
+                />
+                <Input
+                 formProps={{
+                   name: 'cpf',
+                 }}
+                 inputProps={{
+                   placeholder: "CPF",
+                   placeholderTextColor: "#999",
+                   keyboardType: 'numeric'
+                 }}
+                />
+                <Input
+                 formProps={{
+                   name: 'password',
+                 }}
+                 inputProps={{
+                   placeholder: "Senha",
+                   placeholderTextColor: "#999",
+                   secureTextEntry: true
+                 }}
+                />
 
                 <Button label='Criar uma conta' style={styles.botaoEntrar} onPress={handleCriarConta}/>
                 </View>
