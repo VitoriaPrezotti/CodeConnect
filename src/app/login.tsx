@@ -15,7 +15,7 @@ export default function login() {
   const { control, handleSubmit, formState: { errors } } = useForm();
   function handleNextStep(data: any) {
     console.log(data);
-    router.push('/telaprincipal_usuario')
+    router.push('/(tabs)/telaprincipal_usuario')
   }
   const senhaRef = useRef<TextInput>(null);
 

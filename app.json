@@ -4,12 +4,12 @@
     "slug": "CodeConnect",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/Logopreta.png",
+    "icon": "./src/assets/Logopreta.png",
     "scheme": "codeconnect",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./src/assets/images/Logobranca.png",
+      "image": "./src/assets/Logobranca.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/Logobranca.png",
+        "foregroundImage": "./src/assets/Logobranca.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,

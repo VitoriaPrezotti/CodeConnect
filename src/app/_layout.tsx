@@ -47,7 +47,7 @@ export default function Layout() {
       />
 
       <Stack.Screen
-        name="telaprincipal_usuario"
+        name="(tabs)"
         options={{
           headerShown: false,
           headerShadowVisible: false,
@@ -55,6 +55,7 @@ export default function Layout() {
             backgroundColor: '#010409',
           },
         }}
+
       />
     </Stack>
   )

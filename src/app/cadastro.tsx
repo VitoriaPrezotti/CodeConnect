@@ -14,7 +14,7 @@ export default function cadastro() {
   const { control, handleSubmit, formState: { errors } } = useForm();
     function handleNextStep(data: any) {
       console.log(data);
-      router.push('/telaprincipal_usuario')
+      router.push('/(tabs)/telaprincipal_usuario')
     }
     const emailRef = useRef<TextInput>(null);
     const cpfRef = useRef<TextInput>(null);
