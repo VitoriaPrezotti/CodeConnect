@@ -15,6 +15,7 @@ export default function login() {
   const { control, handleSubmit, formState: { errors } } = useForm();
   function handleNextStep(data: any) {
     console.log(data);
+    router.push('/telaprincipal_usuario')
   }
   const senhaRef = useRef<TextInput>(null);
 
@@ -45,7 +46,7 @@ export default function login() {
                 error={errors.email?.message as string}
                 formProps={{
                   name: 'email',
-                  control: control,
+                  control,
                   rules:{
                     required: 'E-mail é obrigatório',
                     pattern: {
@@ -73,7 +74,7 @@ export default function login() {
                 error={errors.password?.message as string}
                 formProps={{
                   name: 'password',
-                  control: control,
+                  control,
                   rules:{
                     required: 'Senha é obrigatória',
                     minLength: {
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
   },
   
   form: {
-    gap: 15, // Espaço entre inputs
+    gap: 12, // Espaço entre inputs
   },
 
   senhaLinha: {
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
   },
 
   divisor: {
-    height: 1,
-    backgroundColor: '#022033',
+    height: 2,
+    backgroundColor: '#011526',
     marginTop: 35,
     marginHorizontal: -25,
   },

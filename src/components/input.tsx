@@ -1,32 +1,50 @@
 import { forwardRef } from "react"
 import { TextInput,StyleSheet,TextInputProps,View, Text } from "react-native"
 import { Controller,UseControllerProps } from "react-hook-form"
+import { TextInputMask } from 'react-native-masked-text'
 
 type Props = {
   formProps: UseControllerProps
   inputProps: TextInputProps
   error?: string
+  mask?: "cpf"
 }
 
-const Input = forwardRef<TextInput, Props>(
-  ({ formProps, inputProps, error = '' }, ref) => {
+const Input = forwardRef<any, Props>(
+  ({ formProps, inputProps, error = "", mask }, ref) => {
     return (
       <Controller
         {...formProps}
         render={({ field }) => (
           <View style={styles.container}>
-            <TextInput
-              ref={ref}
-              value={field.value}
-              onChangeText={field.onChange}
-              onBlur={field.onBlur}
-              style={styles.loginInput}
-              {...inputProps}
-            />
+
+            {mask === "cpf" ? (
+              <TextInputMask
+                ref={ref}
+                type="cpf"
+                value={field.value}
+                onChangeText={field.onChange}
+                onBlur={field.onBlur}
+                style={styles.loginInput}
+                {...inputProps}
+              />
+            ) : (
+              <TextInput
+                ref={ref}
+                value={field.value}
+                onChangeText={field.onChange}
+                onBlur={field.onBlur}
+                style={styles.loginInput}
+                {...inputProps}
+              />
+            )}
 
             {error && (
-              <Text style={styles.errorMessage}>{error}</Text>
+              <Text style={styles.errorMessage}>
+                {error}
+              </Text>
             )}
+
           </View>
         )}
       />

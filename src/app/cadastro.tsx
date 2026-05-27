@@ -1,20 +1,32 @@
-import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native'
+import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
-import { useForm, Controller } from 'react-hook-form'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useState, useRef } from 'react'
 import { Link, router } from 'expo-router'
 import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
 import React from 'react'
+import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
 
 export default function cadastro() {
   const [aceitaEmail,setAceitaEmail] = useState(false)
 
-  const handleCriarConta = () => {
+  const { control, handleSubmit, formState: { errors } } = useForm();
+    function handleNextStep(data: any) {
+      console.log(data);
       router.push('/telaprincipal_usuario')
     }
+    const emailRef = useRef<TextInput>(null);
+    const cpfRef = useRef<TextInput>(null);
+    const senhaRef = useRef<TextInput>(null);
 
-  const { control } = useForm();
+  const [fontsLoaded] = useFonts({
+    Montserrat_600SemiBold,
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
 
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
@@ -32,59 +44,103 @@ export default function cadastro() {
                 
                 {/* Formulário */}
                 <View style={styles.form}>
+                <Text style={styles.titulo}>Nome do usuário</Text>
+
                 <Input
+                error={errors.username?.message as string}
                  formProps={{
                    name: 'username',
-                   control: control,
-                 }}
-                 inputProps={{
-                   placeholder: "Nome do Usuário",
-                   placeholderTextColor: "#999",
-                   keyboardType: "email-address",
-                   autoCapitalize: "none"
+                   control,
+                   rules:{
+                    required: 'Nome do usuário é obrigatório',
+                    minLength: {
+                      value: 10,
+                      message: 'Nome do usuário deve ter pelo menos 10 caracteres'
+                    }
+                  }
+                }}
+                inputProps={{
+                  placeholder: "Nome do Usuário",
+                  placeholderTextColor: "#999",
+                  onSubmitEditing: () => emailRef.current?.focus(),
                  }}
                 />
+
+                <Text style={styles.titulo}>E-mail</Text>
                 
                 <Input
-                 formProps={{
-                   name: 'email',
-                 }}
-                 inputProps={{
-                   placeholder: "E-mail",
-                   placeholderTextColor: "#999"
-                 }}
+                ref={emailRef}
+                error={errors.email?.message as string}
+                formProps={{
+                  name: 'email',
+                  control,
+                  rules:{
+                    required: 'E-mail é obrigatório',
+                    pattern: {
+                      value:  /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+                      message: 'E-mail inválido.'
+                    }
+                  }
+                }}
+                inputProps={{
+                  placeholder: "seu.email@exemplo.com",
+                  placeholderTextColor: "#999",
+                  keyboardType: "email-address",
+                  autoCapitalize: "none",
+                  onSubmitEditing: () => cpfRef.current?.focus(),
+                }}
                 />
+
+                <Text style={styles.titulo}>CPF</Text>
+              
                 <Input
-                 formProps={{
-                   name: 'birthdate',
-                 }}
-                 inputProps={{
-                   placeholder: "Data de Nascimento",
-                   placeholderTextColor: "#999"
-                 }}
-                />
-                <Input
+                 ref={cpfRef}
+                 mask="cpf"
+                 error={errors.cpf?.message as string}
                  formProps={{
                    name: 'cpf',
+                   control,
+                   rules:{
+                     required: 'CPF é obrigatório',
+                     pattern: {
+                       value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+                       message: 'CPF inválido.'
+                     }
+                   }
                  }}
                  inputProps={{
                    placeholder: "CPF",
                    placeholderTextColor: "#999",
-                   keyboardType: 'numeric'
-                 }}
-                />
-                <Input
-                 formProps={{
-                   name: 'password',
-                 }}
-                 inputProps={{
-                   placeholder: "Senha",
-                   placeholderTextColor: "#999",
-                   secureTextEntry: true
+                   keyboardType: 'numeric',
+                   onSubmitEditing: () => senhaRef.current?.focus(),
                  }}
                 />
 
-                <Button label='Criar uma conta' style={styles.botaoEntrar} onPress={handleCriarConta}/>
+                <Text style={styles.titulo}>Senha</Text>
+
+                <Input 
+                ref={senhaRef}
+                error={errors.password?.message as string}
+                formProps={{
+                  name: 'password',
+                  control,
+                  rules:{
+                    required: 'Senha é obrigatória',
+                    minLength: {
+                      value: 6,
+                      message: 'Senha deve ter pelo menos 6 caracteres'
+                    }
+                  }
+                }}
+                inputProps={{
+                  placeholder: "Senha",
+                  placeholderTextColor: "#999",
+                  onSubmitEditing: handleSubmit(handleNextStep), 
+                  secureTextEntry: true
+                }}
+                />
+
+                <Button label='Criar uma conta' style={styles.botaoEntrar} onPress={handleSubmit(handleNextStep)}/>
                 </View>
 
                 <TouchableOpacity
@@ -142,20 +198,26 @@ const styles = StyleSheet.create({
   
   imagem: {
     width: "100%",
-    height: 150, // Altura fixa ao invés de 50%
-    marginTop: 30,
-    marginBottom: 60,
+    height: 140, // Altura fixa ao invés de 50%
+    marginTop: 20,
   },
 
   entrar: {
-    fontSize: 20,
-    fontWeight: 800,
-    marginBottom: 18,
+    fontSize: 27,
+    marginBottom: 60,
     color: '#ffffff',
+    textAlign:'center',
+    fontFamily: 'Montserrat_600SemiBold',
   },
   
   form: {
-    gap: 21, // Espaço entre inputs
+    gap: 12, // Espaço entre inputs
+  },
+
+  titulo:{
+    color:'#ffffff',
+    fontWeight: 700,
+    fontSize:18,
   },
 
   check: {
@@ -166,7 +228,7 @@ const styles = StyleSheet.create({
    checkboxLinha: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 25,
   },
 
   checkbox: {
@@ -195,8 +257,8 @@ const styles = StyleSheet.create({
   },
 
   divisor: {
-    height: 1,
-    backgroundColor: '#022033',
+    height: 2,
+    backgroundColor: '#011526',
     marginTop: 35,
     marginHorizontal: -25,
   },
