@@ -12,7 +12,10 @@
     "@expo-google-fonts/montserrat": "^0.4.2",
     "@expo/vector-icons": "^15.0.3",
     "@hookform/resolvers": "^5.4.0",
+<<<<<<< HEAD
     "@react-native-async-storage/async-storage": "^1.23.1",
+=======
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
     "@react-navigation/native": "^7.2.5",
     "@react-navigation/native-stack": "^7.16.0",
     "expo": "~54.0.33",

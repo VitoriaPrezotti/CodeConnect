@@ -1,4 +1,5 @@
 # CodeConnect
+<<<<<<< HEAD
 
 Aplicativo móvel para conexão de talentos e codificadores, similar ao LinkedIn mas focado em desenvolvedores.
 
@@ -136,4 +137,6 @@ Este é um projeto acadêmico. Contribuições são bem-vindas!
 
 ## 📄 Licença
 
+=======
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 Projeto da Faculdade

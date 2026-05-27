@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useAuth } from '@/contexts/AuthContext';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { Alert, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -37,6 +38,13 @@ export default function telaPrincipal_usuario() {
         );
     }
 
+=======
+import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput} from 'react-native'
+import { Link, router } from 'expo-router'
+import { AntDesign, Feather, Ionicons, FontAwesome5 } from '@expo/vector-icons'
+
+export default function telaPrincipal_usuario() {
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
     return (
         <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.select({ ios:"padding", android:"height"})}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps = "handled">
@@ -56,6 +64,7 @@ export default function telaPrincipal_usuario() {
                                 />
                             </View>
 
+<<<<<<< HEAD
                             <TouchableOpacity onPress={() => router.push('/perfil')} style={styles.profileButton}>
                                 <Feather name="settings" size={22} color="#ffffff" />
                             </TouchableOpacity>
@@ -63,6 +72,13 @@ export default function telaPrincipal_usuario() {
                             <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
                                 <Feather name="log-out" size={22} color="#ffffff" />
                             </TouchableOpacity>
+=======
+                            <Ionicons
+                                name="chatbubble-ellipses-outline"
+                                size={22}
+                                color="#ffffff"
+                            />
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                         </View>
 
                     <View style={styles.card}>
@@ -72,9 +88,15 @@ export default function telaPrincipal_usuario() {
                         </View>
 
                         <View>
+<<<<<<< HEAD
                         <Text style={styles.name}>{user.username || 'Usuário'}</Text>
                         <Text style={styles.role}>
                             {user.email || 'email@exemplo.com'}
+=======
+                        <Text style={styles.name}>Ana Santos</Text>
+                        <Text style={styles.role}>
+                            Frontend Developer | React Specialist
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                         </Text>
                         </View>
                     </View>
@@ -180,6 +202,7 @@ searchBox: {
   gap: 8,
 },
 
+<<<<<<< HEAD
 logoutButton: {
   padding: 8,
 },
@@ -189,6 +212,8 @@ profileButton: {
   marginRight: 8,
 },
 
+=======
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 searchInput: {
   flex: 1,
   color: '#ffffff',
@@ -303,10 +328,13 @@ addButton: {
   justifyContent: 'center',
 },
 
+<<<<<<< HEAD
 loadingText: {
   color: '#ffffff',
   fontSize: 16,
   textAlign: 'center',
 },
 
+=======
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 })

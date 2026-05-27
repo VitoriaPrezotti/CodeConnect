@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Button } from '@/components/Button'
 import { Input } from '@/components/input'
 import { login as loginUser } from '@/services/authService'
@@ -8,12 +9,23 @@ import { Link, router } from 'expo-router'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Alert, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+=======
+import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from 'react-native'
+import { Link, router } from 'expo-router'
+import { useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { Input } from '@/components/input'
+import { Button } from '@/components/Button'
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
+import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 
 export default function login() {
   const [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
   })
 
+<<<<<<< HEAD
   const [isLoading, setIsLoading] = useState(false)
   const { control, handleSubmit, formState: { errors } } = useForm();
   
@@ -41,6 +53,13 @@ export default function login() {
     }
   }
   
+=======
+  const { control, handleSubmit, formState: { errors } } = useForm();
+  function handleNextStep(data: any) {
+    console.log(data);
+    router.push('/(tabs)/telaprincipal_usuario')
+  }
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
   const senhaRef = useRef<TextInput>(null);
 
   if (!fontsLoaded) {
@@ -101,9 +120,15 @@ export default function login() {
                   control,
                   rules:{
                     required: 'Senha é obrigatória',
+<<<<<<< HEAD
                     validate: (value: string) => {
                       const validation = validatePassword(value);
                       return validation.isValid || validation.errors[0];
+=======
+                    minLength: {
+                      value: 6,
+                      message: 'Senha deve ter pelo menos 6 caracteres'
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                     }
                   }
                 }}
@@ -115,6 +140,7 @@ export default function login() {
                 }}
                 />
 
+<<<<<<< HEAD
                 <View style={styles.esqueceuSenha}>
                 <Link href="/recuperar-senha" style={styles.link}>
                   <Text style={styles.linkTexto}>Esqueceu a senha?</Text>
@@ -128,6 +154,29 @@ export default function login() {
                   disabled={isLoading}
                 />
                 </View>
+=======
+                <Button label='Entrar' style={styles.botaoEntrar} onPress={handleSubmit(handleNextStep)}/>
+                </View>
+
+                <View style={styles.divisor}/>
+                <Text style={styles.ou}>ou conecte-se com</Text>
+
+                <TouchableOpacity style={styles.botaoGoogle}>
+                  <AntDesign name="google" size={22} color="white" />
+
+                  <Text style={styles.textoGoogle}>
+                    Continuar com Google
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.botaoApple}>
+                  <FontAwesome name="apple" size={26} color="black" />
+
+                  <Text style={styles.textoApple}>
+                    Continuar com Apple
+                  </Text>
+                </TouchableOpacity>
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 
                 <View>
                 <Text style={styles.cadastro}>Não tem uma conta?{' '} <Link href='/cadastro' style={styles.link}>Cadastre-se</Link></Text>
@@ -177,6 +226,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
 
+<<<<<<< HEAD
   esqueceuSenha: {
     alignItems: 'flex-end',
     marginTop: 8,
@@ -192,6 +242,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+=======
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
   esqueceu: {
     color: '#008dc5',
     fontSize: 13,

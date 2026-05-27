@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Button } from '@/components/Button';
 import { Input } from '@/components/input';
 import { createProject } from '@/services/projectService';
@@ -140,4 +141,23 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#0788b5',
   },
+=======
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function adicionar() {
+    return (
+        <View style={styleSheet.container}>
+            <Text>Tela de adicionar</Text>
+        </View>
+    );
+}
+
+const styleSheet = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#010409',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+>>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 });
