@@ -1,50 +1,64 @@
-<<<<<<< HEAD
-import { getMyProjects } from '@/services/projectService';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { getMyProjects } from '@/services/projectService'
+import { Feather } from '@expo/vector-icons'
+import { useEffect, useState } from 'react'
+import {
+  ActivityIndicator,
+  Alert,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 
 export default function Projetos() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [projects, setProjects] = useState<any[]>([])
+  const [filteredProjects, setFilteredProjects] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [refreshing, setRefreshing] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-    loadProjects();
-  }, []);
+    loadProjects()
+  }, [])
 
   useEffect(() => {
     if (searchQuery) {
-      const filtered = projects.filter(project =>
+      const filtered = projects.filter((project) =>
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      );
-      setFilteredProjects(filtered);
+        project.tags.some((tag: string) =>
+          tag.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+
+      setFilteredProjects(filtered)
     } else {
-      setFilteredProjects(projects);
+      setFilteredProjects(projects)
     }
-  }, [searchQuery, projects]);
+  }, [searchQuery, projects])
 
   async function loadProjects() {
     try {
-      const response = await getMyProjects();
+      const response = await getMyProjects()
+
       if (response.data) {
-        setProjects(response.data);
+        setProjects(response.data)
       } else if (response.error) {
-        Alert.alert('Erro', response.error);
+        Alert.alert('Erro', response.error)
       }
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao carregar projetos');
+    } catch {
+      Alert.alert('Erro', 'Erro ao carregar projetos')
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
   function onRefresh() {
-    setRefreshing(true);
-    loadProjects().then(() => setRefreshing(false));
+    setRefreshing(true)
+    loadProjects().finally(() => setRefreshing(false))
   }
 
   if (isLoading) {
@@ -52,11 +66,11 @@ export default function Projetos() {
       <View style={styles.container}>
         <ActivityIndicator size="large" color="#0788b5" style={styles.loading} />
       </View>
-    );
+    )
   }
 
   return (
-    <ScrollView 
+    <ScrollView
       style={styles.container}
       refreshControl={
         <RefreshControl
@@ -68,9 +82,10 @@ export default function Projetos() {
       }
     >
       <Text style={styles.title}>Meus Projetos</Text>
-      
+
       <View style={styles.searchContainer}>
         <Feather name="search" size={18} color="#9ca3af" />
+
         <TextInput
           style={styles.searchInput}
           placeholder="Buscar projetos..."
@@ -78,18 +93,20 @@ export default function Projetos() {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
+
         {searchQuery.length > 0 && (
           <TouchableOpacity onPress={() => setSearchQuery('')}>
             <Feather name="x" size={18} color="#9ca3af" />
           </TouchableOpacity>
         )}
       </View>
-      
+
       {filteredProjects.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>
             {searchQuery ? 'Nenhum projeto encontrado' : 'Nenhum projeto encontrado'}
           </Text>
+
           <Text style={styles.emptySubtext}>
             {searchQuery ? 'Tente buscar com outros termos' : 'Crie seu primeiro projeto para começar'}
           </Text>
@@ -99,23 +116,28 @@ export default function Projetos() {
           <TouchableOpacity key={project.id} style={styles.card}>
             <View style={styles.header}>
               <View style={styles.avatar}>
-                <Text style={styles.avatarText}>{project.author.charAt(0)}</Text>
+                <Text style={styles.avatarText}>
+                  {project.author.charAt(0)}
+                </Text>
               </View>
+
               <View style={styles.userInfo}>
                 <Text style={styles.author}>{project.author}</Text>
                 <Text style={styles.role}>{project.role}</Text>
               </View>
             </View>
-            
+
             <Text style={styles.projectTitle}>{project.title}</Text>
             <Text style={styles.description}>{project.description}</Text>
-            
+
             <View style={styles.tags}>
-              {project.tags.map((tag, index) => (
-                <Text key={index} style={styles.tag}>{tag}</Text>
+              {project.tags.map((tag: string, index: number) => (
+                <Text key={index} style={styles.tag}>
+                  {tag}
+                </Text>
               ))}
             </View>
-            
+
             <View style={styles.stats}>
               <Text style={styles.stat}>⭐ {project.stars}</Text>
               <Text style={styles.stat}>👁️ {project.views}</Text>
@@ -124,7 +146,7 @@ export default function Projetos() {
         ))
       )}
     </ScrollView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -135,17 +157,20 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 40,
   },
+
   loading: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   title: {
     fontSize: 28,
     fontWeight: '800',
     color: '#ffffff',
     marginBottom: 20,
   },
+
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -158,11 +183,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     gap: 12,
   },
+
   searchInput: {
     flex: 1,
     color: '#ffffff',
     fontSize: 16,
   },
+
   card: {
     backgroundColor: '#11151b',
     borderWidth: 1,
@@ -171,11 +198,13 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
   },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
   },
+
   avatar: {
     width: 40,
     height: 40,
@@ -185,40 +214,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 12,
   },
+
   avatarText: {
     color: '#ffffff',
     fontSize: 18,
     fontWeight: '700',
   },
+
   userInfo: {
     flex: 1,
   },
+
   author: {
     color: '#ffffff',
     fontSize: 16,
     fontWeight: '700',
   },
+
   role: {
     color: '#b5b5b5',
     fontSize: 14,
   },
+
   projectTitle: {
     color: '#ffffff',
     fontSize: 18,
     fontWeight: '800',
     marginBottom: 8,
   },
+
   description: {
     color: '#ffffff',
     fontSize: 14,
     marginBottom: 12,
   },
+
   tags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginBottom: 12,
   },
+
   tag: {
     color: '#008dc5',
     borderWidth: 1,
@@ -228,6 +265,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     fontSize: 12,
   },
+
   stats: {
     flexDirection: 'row',
     gap: 20,
@@ -235,44 +273,29 @@ const styles = StyleSheet.create({
     borderTopColor: '#20242c',
     paddingTop: 12,
   },
+
   stat: {
     color: '#666',
     fontSize: 14,
   },
+
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 60,
   },
+
   emptyText: {
     color: '#ffffff',
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 8,
   },
+
   emptySubtext: {
     color: '#666',
     fontSize: 14,
     textAlign: 'center',
   },
-=======
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function Projetos() {
-    return (
-        <View style={styleSheet.container}>
-            <Text>Tela de Projetos</Text>
-        </View>
-    );
-}
-
-const styleSheet = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#010409',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
-});
+})

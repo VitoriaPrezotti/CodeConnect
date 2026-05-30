@@ -9,7 +9,7 @@ export default function Perfil() {
   const [editedUser, setEditedUser] = useState({
     username: user?.username || '',
     email: user?.email || '',
-    bio: '',
+    bio: user?.bio || '',
   })
 
   function handleSave() {

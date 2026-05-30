@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 import { Button } from '@/components/Button'
 import { Input } from '@/components/input'
+import { Toast } from '@/components/Toast'
 import { register } from '@/services/authService'
 import { saveToken, saveUser } from '@/services/storageService'
 import { validateCPF } from '@/utils/cpfValidator'
@@ -81,29 +81,6 @@ export default function cadastro() {
   const emailRef = useRef<TextInput>(null);
   const cpfRef = useRef<TextInput>(null);
   const senhaRef = useRef<TextInput>(null);
-=======
-import { Text, ScrollView, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from 'react-native'
-import { AntDesign, FontAwesome } from '@expo/vector-icons'
-import { useForm } from 'react-hook-form'
-import { useState, useRef } from 'react'
-import { Link, router } from 'expo-router'
-import { Input } from '@/components/input'
-import { Button } from '@/components/Button'
-import React from 'react'
-import { useFonts, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
-
-export default function cadastro() {
-  const [aceitaEmail,setAceitaEmail] = useState(false)
-
-  const { control, handleSubmit, formState: { errors } } = useForm();
-    function handleNextStep(data: any) {
-      console.log(data);
-      router.push('/(tabs)/telaprincipal_usuario')
-    }
-    const emailRef = useRef<TextInput>(null);
-    const cpfRef = useRef<TextInput>(null);
-    const senhaRef = useRef<TextInput>(null);
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 
   const [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
@@ -190,13 +167,10 @@ export default function cadastro() {
                      pattern: {
                        value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
                        message: 'CPF inválido.'
-<<<<<<< HEAD
                      },
                      validate: (value: string) => {
                        const cpfClean = value.replace(/\D/g, '');
                        return validateCPF(cpfClean) || 'CPF inválido.';
-=======
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                      }
                    }
                  }}
@@ -218,31 +192,20 @@ export default function cadastro() {
                   control,
                   rules:{
                     required: 'Senha é obrigatória',
-<<<<<<< HEAD
                     validate: (value: string) => {
                       const validation = validatePassword(value);
                       return validation.isValid || validation.errors[0];
-=======
-                    minLength: {
-                      value: 6,
-                      message: 'Senha deve ter pelo menos 6 caracteres'
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                     }
                   }
                 }}
                 inputProps={{
-<<<<<<< HEAD
                   placeholder: "Senha (mínimo 8 caracteres, maiúscula, minúscula, número e especial)",
-=======
-                  placeholder: "Senha",
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                   placeholderTextColor: "#999",
                   onSubmitEditing: handleSubmit(handleNextStep), 
                   secureTextEntry: true
                 }}
                 />
 
-<<<<<<< HEAD
                 {password && (
                   <View style={styles.passwordStrengthContainer}>
                     <View style={styles.passwordStrengthBars}>
@@ -278,9 +241,6 @@ export default function cadastro() {
                   onPress={handleSubmit(handleNextStep)}
                   disabled={isLoading}
                 />
-=======
-                <Button label='Criar uma conta' style={styles.botaoEntrar} onPress={handleSubmit(handleNextStep)}/>
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
                 </View>
 
                 <TouchableOpacity
@@ -294,28 +254,6 @@ export default function cadastro() {
                   <Text style={styles.checkboxTexto}>Receber por e-mail atualizações sobre anúncios e {'\n'}novas vagas disponíveis.</Text>
 
                 </TouchableOpacity>
-<<<<<<< HEAD
-=======
-                
-                <View style={styles.divisor}/>
-                <Text style={styles.ou}>ou conecte-se com</Text>
-
-                <TouchableOpacity style={styles.botaoGoogle}>
-                  <AntDesign name="google" size={22} color="white" />
-
-                  <Text style={styles.textoGoogle}>
-                    Continuar com Google
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.botaoApple}>
-                  <FontAwesome name="apple" size={26} color="black" />
-
-                  <Text style={styles.textoApple}>
-                    Continuar com Apple
-                  </Text>
-                </TouchableOpacity>
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 
                 <View>
                 <Text style={styles.termos}>
@@ -327,7 +265,6 @@ export default function cadastro() {
 
             </View>
         </ScrollView>
-<<<<<<< HEAD
 
         <Toast
           message={toastMessage}
@@ -335,8 +272,6 @@ export default function cadastro() {
           visible={toastVisible}
           onHide={() => setToastVisible(false)}
         />
-=======
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
     </KeyboardAvoidingView>
   )
 }
@@ -409,7 +344,6 @@ const styles = StyleSheet.create({
     marginTop:24,
   },
 
-<<<<<<< HEAD
   passwordStrengthContainer: {
     marginTop: 8,
     marginBottom: 16,
@@ -434,8 +368,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 
-=======
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
   divisor: {
     height: 2,
     backgroundColor: '#011526',

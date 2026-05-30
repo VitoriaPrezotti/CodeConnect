@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 import { getJobs } from '@/services/jobService';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Feather } from '@expo/vector-icons'
+import { ActivityIndicator, Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 
 export default function vagas() {
   const [jobs, setJobs] = useState<any[]>([]);
@@ -105,7 +105,7 @@ export default function vagas() {
           </View>
           
           <View style={styles.tags}>
-            {job.tags.map((tag, index) => (
+            {job.tags.map((tag: string, index: number) => (
               <Text key={index} style={styles.tag}>{tag}</Text>
             ))}
           </View>
@@ -238,23 +238,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-=======
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function vagas() {
-    return (
-        <View style={styleSheet.container}>
-            <Text>Tela de Vagas</Text>
-        </View>
-    );
-}
-
-const styleSheet = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#010409',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
->>>>>>> 5fdb04897e2f0b8f4e8174094d061296b5a840bf
 });

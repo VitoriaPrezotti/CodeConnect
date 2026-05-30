@@ -7,6 +7,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
+  bio?: string;
 }
 
 export async function saveToken(token: string): Promise<void> {
